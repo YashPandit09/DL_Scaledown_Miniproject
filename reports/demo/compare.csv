@@ -1,0 +1,6 @@
+method,raw samples,valid,raw valid (%),mean quality (valid),best quality
+B1 uniform,64,3,4.6875,0.2623,0.2762
+B2 statistical,64,32,50.0,0.5812,0.8409
+G0 generator,64,34,53.125,0.8801,0.8945
+M1 CVAE,64,21,32.8125,0.7055,0.8936
+M2 CVAE + latent optimization,64,47,73.4375,0.6595,0.8936

@@ -1,0 +1,2 @@
+run,samples,valid_share,accuracy,precision,recall,f1,f1_invalid,roc_auc,spearman_score,true_valid,false_valid,true_invalid,false_invalid
+e9a,9000,0.623,0.9662,0.9666,0.9797,0.9731,0.9547,0.9908,0.655,5493,190,3203,114

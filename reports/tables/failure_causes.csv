@@ -1,0 +1,5 @@
+method,samples,valid,cause: out of room,cause: overlap,cause: door blocked,cause: unreachable,breaks: out of room,breaks: overlap,breaks: door blocked,breaks: unreachable,several checks,poor,good,rooms,rooms without a valid layout,rooms collapsed,lowest room diversity (m)
+B1,6400,0.0988,0.0,0.7092,0.1209,0.0711,0.0,0.7092,0.4091,0.6333,0.5983,0.0966,0.0022,100,0.16,0.0,1.627
+B2,6400,0.5863,0.003,0.0109,0.315,0.0848,0.003,0.0117,0.3191,0.3489,0.2652,0.2075,0.3787,100,0.0,0.0,1.5006
+M1,6400,0.1438,0.297,0.4369,0.103,0.0194,0.297,0.5667,0.343,0.4495,0.5305,0.0312,0.1125,100,0.11,0.01,0.3617
+M2,6400,0.6777,0.0397,0.0609,0.0369,0.1848,0.0397,0.0645,0.0959,0.2845,0.1078,0.1764,0.5012,100,0.0,0.0,1.0484

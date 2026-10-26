@@ -1,0 +1,13 @@
+case,caption,method,room,sample,width,depth,door_wall,items,breaks,quality,weakest_term
+1,M2: out of room only,M2,20,36,4.4071,4.6358,S,"sofa, tv_unit, coffee_table, armchair, side_table",out of room,,
+2,M2: overlap only,M2,0,43,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",overlap,,
+3,M2: door blocked only,M2,0,27,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",door blocked,,
+4,M2: unreachable only,M2,0,1,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",unreachable,,
+5,M2: several checks at once,M2,0,32,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",overlap; unreachable,,
+6,M2: valid but poor (its lowest score),M2,97,2,3.5493,3.5513,W,"sofa, tv_unit, armchair",,0.2252,alignment
+7,M1: before repair,M1,0,5,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",out of room; door blocked; unreachable,,
+8,"M2: the same candidate, repaired",M2,0,5,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",,0.8553,circulation
+9,M1: before repair,M1,1,1,5.4561,5.2932,S,"sofa, tv_unit, bookshelf, side_table",overlap; door blocked; unreachable,,
+10,"M2: the same candidate, not repaired",M2,1,1,5.4561,5.2932,S,"sofa, tv_unit, bookshelf, side_table",door blocked; unreachable,,
+11,B2: valid but poor (its lowest score),B2,69,28,3.7217,3.5112,E,"sofa, tv_unit, coffee_table, bookshelf",,0.2314,alignment
+12,B1: a typical random placement,B1,0,1,6.3513,3.2754,E,"sofa, tv_unit, armchair, side_table",overlap; door blocked,,

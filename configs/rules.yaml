@@ -1,0 +1,54 @@
+# Layout rules and thresholds: the hard checks H1 to H4, the quality score and the room ranges.
+#
+# Every number here is our own design assumption, not an official standard, and must be
+# presented as one in the report and the viva. Lengths are in meters, areas in m^2.
+
+door:
+  width: 0.9
+  clearance_depth: 0.9       # how far the clearance zone reaches into the room
+  corner_margin: 0.65        # the door centre stays this far from a corner
+                             # (half the door width plus 0.2 m)
+
+hard_checks:
+  in_room_tol: 1.0e-3        # H1: a footprint may stick out of the room by this much
+  max_pair_overlap: 0.005    # H2: largest allowed intersection of two footprints
+  door_overlap_tol: 1.0e-4   # H3: largest allowed intersection with the clearance zone
+
+reachability:                # H4
+  cell: 0.10                 # grid cell size. Cells are sampled at their centres, so a
+                             # corridor narrower than min_path_width always fails, one at least
+                             # min_path_width + cell wide always passes, and one in between
+                             # depends on how it lines up with the grid.
+  min_path_width: 0.6        # a walkable cell is at least half of this from obstacles
+  access_offset: 0.35        # the access line runs this far in front of the front face
+  access_tolerance: 0.3      # an item counts as reached if a reached cell is this close
+                             # to its access line (the whole face, not just its middle)
+
+feasibility:                 # the pre-check that turns away rooms too crowded to furnish
+  f_max: 0.38                # calibrated on data/v1: the generator furnishes half of the rooms
+                             # at a footprint ratio of 0.377 (logistic fit, 3,903 rooms). The
+                             # starting value was 0.45
+
+quality:                     # the soft quality score S
+  weights: {align: 0.30, relations: 0.30, circulation: 0.25, space: 0.15}
+  wall_distance: 0.10        # "against a wall" means within this distance of it
+  space_band: [0.15, 0.40]   # best range of furniture area / room area
+  space_falloff: 0.15        # the space score falls linearly to 0 this far outside the
+                             # band, so it is 0 for an empty room and at 55% coverage
+  relation_falloff: 0.5      # a relation scores 1 inside its range and falls linearly to
+                             # 0 this far outside it; a relation whose items are not all
+                             # present is skipped
+
+rooms:
+  living_room:
+    width: [3.5, 7.0]        # sampling range of W
+    depth: [3.0, 6.0]        # sampling range of D
+    against_wall: [tv_unit, bookshelf]  # back to a wall, facing into the room. The
+                             # sofa is exempt because layout style (b) floats it in the room.
+    relations:               # used by the quality score and the generator
+      sofa_tv_distance: [1.5, 3.5]    # sofa and TV unit face each other; measured front face
+                                      # to front face. A 3.0 m deep room leaves about 1.7 m.
+      coffee_table_gap: [0.35, 0.50]  # between sofa and TV; gap from the sofa's front face
+      side_table_max_gap: 0.15        # gap to the nearer end (short side) of the sofa
+      armchair_max_gap: 1.2           # gap between the armchair's and the coffee table's
+                                      # footprints; the armchair stands at 90 degrees to the sofa

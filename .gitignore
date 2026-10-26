@@ -1,0 +1,17 @@
+# Generated datasets and training runs: regenerate them from the seed and config
+data/
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

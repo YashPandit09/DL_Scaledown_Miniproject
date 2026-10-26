@@ -1,0 +1,25 @@
+{
+  "epochs_run": 92,
+  "stopped_early": true,
+  "selected_epoch": 77,
+  "selected_validation_loss": 0.9936419725418091,
+  "selected_position_loss": 0.366630494594574,
+  "selected_rotation_loss": 0.016298647969961166,
+  "selected_kl": 6.107128143310547,
+  "active_units": 10,
+  "parameters": 177732,
+  "outlier_layouts": 0,
+  "train_eval_loss": 0.9905232191085815,
+  "position_error_median": 0.15832296013832092,
+  "position_error_mean": 0.19275492429733276,
+  "position_error_near_walls": 0.22626927495002747,
+  "position_error_rest": 0.18364612758159637,
+  "m1_check": {
+    "rooms": 100,
+    "samples": 6400,
+    "rvr": 0.16921875,
+    "quality": 0.6188720325862387,
+    "mean_overlap": 0.15514800183379662,
+    "diversity": 2.1293441958649226
+  }
+}

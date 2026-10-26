@@ -1,0 +1,4 @@
+method,rooms,samples,rvr,mean_overlap,reachability,quality,valid_per_room,rooms_3_valid,diversity,diversity_ratio,diversity_rooms,attempts_per_valid,ms_per_valid,seconds_per_room
+B1,500,32000,0.1006,0.2125,0.5542,0.2868,6.44,0.668,2.3694,0.9785,150,9.9379,20.306,0.1308
+B2,500,32000,0.5783,0.0022,0.6997,0.5508,37.01,0.998,2.385,1.0172,200,1.7293,4.1492,0.1536
+G0,500,32000,0.7469,,,0.8821,47.804,0.998,2.3479,1.0014,200,1.3388,1.9798,0.0946

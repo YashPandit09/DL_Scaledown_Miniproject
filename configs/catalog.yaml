@@ -1,0 +1,61 @@
+# Furniture catalog.
+#
+# All sizes and prices are illustrative placeholders chosen by us (an assumption), not retail
+# data. Sizes are in meters: w = width along the front face, d = depth from front to back,
+# h = height. Prices are in INR. The first variant of a slot is its default.
+#
+# Slots are listed in layout-vector order: `slot` must equal the entry's position, and
+# reordering slots changes the meaning of every dataset built from this file.
+#
+# Per-slot flags:
+#   mandatory     always present (the sofa and the TV unit in a living room)
+#   rot_symmetry  1 = has a distinct front; 2 = looks the same after 180 degrees;
+#                 4 = looks the same after any 90 degrees
+#   needs_access  false for items that are viewed rather than walked up to (skipped by H4)
+
+living_room:
+  slots:
+    - slot: 0
+      name: sofa
+      mandatory: true
+      rot_symmetry: 1
+      needs_access: true
+      variants:
+        - {id: sofa_3seater, w: 2.10, d: 0.90, h: 0.85, price: 28000}
+        - {id: sofa_2seater, w: 1.60, d: 0.90, h: 0.85, price: 19000}
+    - slot: 1
+      name: tv_unit
+      mandatory: true
+      rot_symmetry: 1
+      needs_access: false  # floor-standing, placed against a wall, viewed from a distance
+      variants:
+        - {id: tv_unit_standard, w: 1.50, d: 0.40, h: 0.50, price: 9000}
+        - {id: tv_unit_large, w: 1.80, d: 0.40, h: 0.50, price: 12000}
+    - slot: 2
+      name: coffee_table
+      mandatory: false
+      rot_symmetry: 2
+      needs_access: true
+      variants:
+        - {id: coffee_table_standard, w: 1.00, d: 0.55, h: 0.45, price: 6000}
+    - slot: 3
+      name: bookshelf
+      mandatory: false
+      rot_symmetry: 1
+      needs_access: true
+      variants:
+        - {id: bookshelf_standard, w: 0.80, d: 0.30, h: 1.80, price: 7000}
+    - slot: 4
+      name: armchair
+      mandatory: false
+      rot_symmetry: 1
+      needs_access: true
+      variants:
+        - {id: armchair_standard, w: 0.80, d: 0.80, h: 0.85, price: 8000}
+    - slot: 5
+      name: side_table
+      mandatory: false
+      rot_symmetry: 4
+      needs_access: true
+      variants:
+        - {id: side_table_standard, w: 0.45, d: 0.45, h: 0.50, price: 2500}

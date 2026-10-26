@@ -1,0 +1,8 @@
+# The demo app's look (python run.py app). Light, so it reads on a projector and matches the
+# figures; the accent is the figures' blue, because red is kept for items that break a check.
+[theme]
+base = "light"
+primaryColor = "#2a78d6"
+
+[browser]
+gatherUsageStats = false

@@ -1,0 +1,125 @@
+# Master configuration: the data, the models, their training and the pipeline. Every training
+# run and dataset build saves a copy of this file next to its outputs. Lengths are in meters.
+# Where an experiment varies a setting, the comment names the experiment.
+seed: 0
+
+raster:                # the images the CNN evaluator sees (spacegen/raster.py)
+  canvas: 8.0          # meters per side of the fixed canvas; the room sits at its origin
+  pixels: 128          # pixels per side, so 0.0625 m per pixel
+  front_strip: 0.10    # thickness of the band marking an item's front, about 1.6 pixels
+
+generator:             # the rule-based generator of Set A and of the G0 reference. Room sizes and
+                       # the spacing ranges between items come from rules.yaml.
+  attempts: 20         # placements tried per room; a room that fails them all is dropped
+  wall_gap: 0.05       # an item placed against a wall stands 0 to 5 cm from it
+  jitter: 0.05         # standard deviation of the small random shifts of some items (m)
+  walkway: 0.75        # style (b): clear floor behind the floating sofa, above the 0.6 m
+                       # path width so the walkway counts as passable whatever the grid alignment
+  armchair_gap: [0.4, 0.9]  # armchair to the end of the coffee table (the relation allows 1.2)
+  shelf_clearance: 0.6 # clear floor kept in front of the bookshelf
+  optional_items:      # each optional item is in the room with a probability that rises
+    area: [10.5, 30.0] # linearly with floor area (m^2) between these two points
+    probability: [0.25, 0.75]
+
+set_b:                 # labelled layouts for the CNN evaluator. Half are generator layouts as
+                       # they come; the other half are perturbed copies, a tenth of Set B per
+                       # type: jitter, rotation, random, overlap, near-miss.
+  clean_share: 0.5
+  jitter_sigmas: [0.1, 0.3, 0.6]  # m; each sigma gets a third of the jitter share
+  jitter_items: 0.5    # chance that each item is jittered; at least one always is
+  near_miss_area: [0.002, 0.0125]  # overlap of two items, log-uniform, so that half fall below
+                       # the checker's 0.005 m^2 tolerance
+  near_miss_gap: 0.03  # door near-miss: from this far clear of the zone to this far inside
+  near_miss_reach: 1.0 # near-miss moves of at most this length (m) are preferred
+
+splits:
+  fractions: [0.70, 0.15, 0.15]  # train, validation, test, split by layout
+  held_out:            # rooms that training never sees (experiment E10)
+    interpolation: {area: [22.0, 26.0]}       # a gap inside the training ranges
+    unseen_combination: {area: [32.0, .inf]}  # each W and D occurs in training, not together
+    out_of_range: {width: [7.0, 8.0], depth: [6.0, 7.0]}  # beyond the training ranges
+  held_out_rooms: 1000 # rooms per held-out set, each with one generator layout
+  diversity_rooms: 200 # test rooms for the diversity reference (G0) ...
+  diversity_layouts: 20  # ... with this many generator layouts each
+
+dataset:               # python run.py data writes data/<version>/
+  version: v1
+  set_a: 30000         # good layouts for the CVAE
+  set_b: 60000         # labelled layouts for the evaluator
+  calibration_rooms: 5000  # rooms for calibrating f_max, spread evenly over the footprint
+                       # ratio (crowded rooms are rare in plain draws)
+  calibration_items: 0.5   # each optional item is in a calibration room with this chance,
+                       # whatever the room's size
+
+baselines:             # B1 and B2 (spacegen/baselines.py)
+  b2_bins: 3           # B2 groups training rooms into this many width bins and depth bins,
+                       # each holding an equal share of the training rooms
+  b2_min_examples: 20  # a bin with fewer examples of an item borrows from rooms of every
+                       # size with the same door wall, then from all rooms
+  b2_noise: 0.02       # standard deviation of the noise added to a drawn u and v
+  b2_redraws: 10       # times an item is drawn again while it overlaps one already placed
+  b2_redraw_outside: true   # also draw again while the item sticks out of the room; without
+                       # it B2 fails mostly because positions taken as fractions of a larger
+                       # training room stick out of a smaller one (20% vs 60% raw valid)
+
+evaluation:            # the same rooms and samples for every method
+  rooms: 500           # Set A test rooms: the diversity-reference rooms, then random ones
+  samples: 64          # raw samples per room (the pipeline also draws 64 candidates)
+
+cvae:                  # the generator (spacegen/models/cvae.py); experiments E2 to E7 vary these
+  latent: 16           # size of z; E5 tries 4, 16 and 32
+  hidden: 256          # units per hidden layer
+  depth: 2             # hidden layers in the encoder and in the decoder; E3b also tries 6
+  activation: relu     # relu, leaky_relu, elu, gelu, tanh or sigmoid; E3a compares them
+  batch_norm: true     # E3b and E6 switch it off
+  dropout: 0.1         # E6 tries 0, 0.1 and 0.3
+  position_head: sigmoid  # sigmoid, or linear (clamped to [0, 1] only when decoding); E7
+  position_loss: mse   # mse, mae or huber; E2
+  huber_delta: 0.05    # E2 tries 0.01, 0.05 and 0.1
+  lambda_rot: 1.0      # weight of the rotation cross-entropy
+  lambda_overlap: 0.0  # optional penetration-depth term on the decoded positions; E2 tries 1.0
+  overlap_margin: 0.0  # margin of that term: 0, because training layouts may touch
+
+evaluator:             # the CNN evaluator (spacegen/models/evaluator.py)
+  channels: [16, 32, 64, 64]  # the four Conv-BN-ReLU-MaxPool blocks
+  hidden: 128          # units of the dense layer
+  dropout: 0.3
+  lambda_score: 1.0    # weight of the score regression next to the BCE
+  batch: 256
+  lr: 1.0e-3           # Adam
+
+cvae_training:         # python run.py train-cvae (spacegen/train_cvae.py)
+  optimizer: adam      # adam, sgd, sgd_momentum or rmsprop; E4 compares them
+  lr: 1.0e-3
+  momentum: 0.9        # for sgd_momentum
+  batch: 256
+  max_epochs: 200
+  beta_target: 0.1     # the final KL weight; E5 tries 0.01, 0.1, 0.5 and 1.0
+  anneal_epochs: 20    # beta rises linearly from 0 to beta_target over these epochs
+  patience: 15         # epochs without a better validation loss before stopping,
+                       # counted only after annealing
+  early_stopping: true # E6 compares it with training for max_epochs
+  check_rooms: 100     # after training, Set A test rooms to sample (64 each) for a first
+                       # raw valid rate of M1
+  outliers: 0.0        # E2's outlier variant: share of the training layouts that get one item
+                       # moved to a random spot in the room (0.04 in E2); validation and test stay clean
+
+latent_opt:            # M2: optimize z with the decoder frozen (spacegen/latent_opt.py)
+  steps: 150           # Adam steps; E8 tries 0, 25, 50, 100 and 200
+  lr: 0.05             # Adam
+  lambda_overlap: 10.0 # sum over item pairs of the squared penetration depth
+  lambda_room: 10.0    # how far items stick out of the room
+  lambda_door: 10.0    # squared penetration into the door's clearance zone
+  lambda_pin: 20.0     # squared distance of pinned items from their pins
+  lambda_anchor: 0.05  # 0.5 ||z - z0||^2, the anchor to each candidate's start
+  margin: 0.05         # items closer than this (m) already count as overlapping
+  tolerance: 1.0e-4    # a candidate stops once its constraint terms (the anchor not
+                       # counted, since it grows whenever z moves) fall below this
+
+pipeline:              # one request, from the room to the top 3 (spacegen/pipeline.py)
+  candidates: 64       # latent samples per request
+  latent_opt: true     # M2; false gives M1
+  top_k: 3             # layouts shown
+  tau_div: 0.3         # a pick must differ from every earlier pick by this much (m)
+  relax: 0.25          # when fewer than top_k qualify, tau_div shrinks by this share ...
+  relax_times: 2       # ... up to this many times

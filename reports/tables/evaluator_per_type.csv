@@ -1,0 +1,10 @@
+perturbation,samples,valid_share,accuracy,f1_invalid,false_alarm_rate
+clean,4487,1.0,0.9978,,0.0022
+jitter_0.1,304,0.4803,0.9178,0.9147,
+jitter_0.3,279,0.3226,0.9104,0.93,
+jitter_0.6,292,0.2363,0.9281,0.9508,
+rotation,898,0.2873,0.9499,0.9639,
+random,868,0.1083,0.9412,0.9671,
+overlap,959,0.0,1.0,1.0,
+near_miss_overlap,474,0.519,0.8143,0.8189,
+near_miss_door,439,0.4943,0.9112,0.9074,

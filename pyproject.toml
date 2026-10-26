@@ -1,0 +1,4 @@
+# The project runs from the repository root without installation.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

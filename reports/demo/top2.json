@@ -1,0 +1,66 @@
+{
+  "room": {
+    "type": "living_room",
+    "width": 5.0,
+    "depth": 4.0
+  },
+  "door": {
+    "wall": "W",
+    "offset": 0.5,
+    "width": 0.9
+  },
+  "items": [
+    {
+      "slot": 0,
+      "id": "sofa_3seater",
+      "w": 2.1,
+      "d": 0.9,
+      "h": 0.85,
+      "x": 2.988247573375702,
+      "y": 0.4729444980621338,
+      "rotation": 0,
+      "price": 28000
+    },
+    {
+      "slot": 1,
+      "id": "tv_unit_large",
+      "w": 1.8,
+      "d": 0.4,
+      "h": 0.5,
+      "x": 3.06037575006485,
+      "y": 3.795933246612549,
+      "rotation": 2,
+      "price": 12000
+    },
+    {
+      "slot": 2,
+      "id": "coffee_table_standard",
+      "w": 1.0,
+      "d": 0.55,
+      "h": 0.45,
+      "x": 2.979203164577484,
+      "y": 1.6632301807403564,
+      "rotation": 0,
+      "price": 6000
+    },
+    {
+      "slot": 4,
+      "id": "armchair_standard",
+      "w": 0.8,
+      "d": 0.8,
+      "h": 0.85,
+      "x": 1.3800813257694244,
+      "y": 1.7013674974441528,
+      "rotation": 1,
+      "price": 8000
+    }
+  ],
+  "metrics": {
+    "quality": 0.8789,
+    "cost": 54000
+  },
+  "meta": {
+    "rank": 2,
+    "seed": 0
+  }
+}

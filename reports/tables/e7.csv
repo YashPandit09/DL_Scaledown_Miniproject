@@ -1,0 +1,3 @@
+experiment,setting,run,epochs,selected_epoch,val_loss,val_position,val_rotation,val_kl,active_units,position_error_median,position_error_mean,position_error_near_walls,position_error_rest,train_loss,train_eval_loss,epochs_to_target,m1_rvr,m1_quality,m1_diversity,dead_share,seconds
+e7,sigmoid head,default,119,104,0.5712,0.10723,0.03362,4.30349,8,0.52296,0.57576,0.55445,0.58155,0.60301,0.56899,24,0.12094,0.55426,1.86589,0.0,62.47
+e7,"linear head, clamped",position_head-linear,88,73,0.58568,0.11742,0.02555,4.42705,8,0.56372,0.6058,0.56599,0.61663,0.63598,0.58482,26,0.16031,0.53696,1.88467,0.0,80.28

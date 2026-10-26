@@ -1,0 +1,15 @@
+# Versions tested together on Python 3.12.5 (Windows 11). NumPy 2.4 and SciPy 1.17 need Python 3.11+.
+# GPU laptop: install the CUDA build of PyTorch first (see README), then this file.
+numpy==2.4.6
+scipy==1.17.1
+torch==2.5.1
+pandas==2.3.3
+matplotlib==3.10.8
+scikit-learn==1.9.0
+pyyaml==6.0.3
+streamlit==1.52.1
+pytest==9.0.2
+ipykernel==6.29.5  # run the notebooks in Jupyter or VS Code
+nbformat==5.11.1
+nbclient==0.11.0  # re-execute a notebook from a script
+markdown-it-py==4.0.0  # python run.py pdf: the report as a PDF

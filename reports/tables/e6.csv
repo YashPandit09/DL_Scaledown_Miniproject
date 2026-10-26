@@ -1,0 +1,6 @@
+experiment,setting,run,epochs,selected_epoch,val_loss,val_position,val_rotation,val_kl,active_units,position_error_median,position_error_mean,position_error_near_walls,position_error_rest,train_loss,train_eval_loss,epochs_to_target,m1_rvr,m1_quality,m1_diversity,dead_share,seconds
+e6,default,default,119,104,0.5712,0.10723,0.03362,4.30349,8,0.52296,0.57576,0.55445,0.58155,0.60301,0.56899,24,0.12094,0.55426,1.86589,0.0,62.47
+e6,BatchNorm off,batch_norm-false,155,140,0.55496,0.1133,0.02916,4.12497,5,0.59567,0.64173,0.67623,0.63235,0.57752,0.54883,26,0.10641,0.576,1.81835,0.12695,146.96
+e6,dropout 0,dropout-0.0,87,72,0.57205,0.10591,0.03187,4.34277,8,0.50684,0.56259,0.5232,0.5733,0.5818,0.56787,21,0.13516,0.56713,1.93337,0.0,92.1
+e6,dropout 0.3,dropout-0.3,164,149,0.579,0.1274,0.02486,4.2674,7,0.64693,0.7012,0.73075,0.69317,0.65391,0.57562,31,0.08781,0.53308,1.66388,0.0,153.93
+e6,200 fixed epochs,early_stopping-false,200,200,0.55899,0.10135,0.02735,4.30283,8,0.50332,0.56048,0.53837,0.5665,0.58921,0.55223,24,0.12656,0.58505,1.8698,0.0,185.31

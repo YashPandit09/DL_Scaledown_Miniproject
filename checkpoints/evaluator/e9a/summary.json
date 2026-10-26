@@ -1,0 +1,6 @@
+{
+  "epochs": 30,
+  "selected_epoch": 26,
+  "selected_validation_loss": 0.1389413707256317,
+  "parameters": 585682
+}
