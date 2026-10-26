@@ -16,9 +16,9 @@
       "w": 2.1,
       "d": 0.9,
       "h": 0.85,
-      "x": 3.26041579246521,
-      "y": 2.970496654510498,
-      "rotation": 2,
+      "x": 1.3859140872955322,
+      "y": 0.45798546075820923,
+      "rotation": 0,
       "price": 28000
     },
     {
@@ -27,9 +27,9 @@
       "w": 1.8,
       "d": 0.4,
       "h": 0.5,
-      "x": 3.3249136805534363,
-      "y": 0.20597203075885773,
-      "rotation": 0,
+      "x": 1.5130014717578888,
+      "y": 3.7811226844787598,
+      "rotation": 2,
       "price": 12000
     },
     {
@@ -38,29 +38,22 @@
       "w": 1.0,
       "d": 0.55,
       "h": 0.45,
-      "x": 3.1945395469665527,
-      "y": 1.7696014642715454,
+      "x": 1.4621786773204803,
+      "y": 1.6130727529525757,
       "rotation": 0,
       "price": 6000
-    },
-    {
-      "slot": 4,
-      "id": "armchair_standard",
-      "w": 0.8,
-      "d": 0.8,
-      "h": 0.85,
-      "x": 1.631845384836197,
-      "y": 1.6537139415740967,
-      "rotation": 1,
-      "price": 8000
     }
   ],
   "metrics": {
-    "quality": 0.8542,
-    "cost": 54000
+    "rank": 1,
+    "valid": true,
+    "quality": 0.9057,
+    "evaluator_score": 0.8994,
+    "evaluator_valid": 0.9974
   },
   "meta": {
-    "rank": 1,
-    "seed": 0
+    "method": "M2",
+    "seed": 0,
+    "cvae": "C:\\Users\\Thrill3r\\.gemini\\antigravity-ide\\scratch\\DL_MiniProject\\DL_Scaledown_Miniproject-main\\DL_Scaledown_Miniproject-main\\checkpoints\\cvae\\frozen\\seed-0"
   }
 }
